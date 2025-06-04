@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mohamed Attef - Celebrities</title>
+    <!-- Bootstrap 4 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    />
+    <!-- Google Fonts (Cairo) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "Cairo", sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        opacity: 0;
+        transition: opacity 0.5s ease-in;
+      }
+      body.loaded {
+        opacity: 1;
+      }
+      .navbar {
+        background: linear-gradient(90deg, #2e2e2e, #75094c);
+        color: #f7e9f0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+      .navbar-brand,
+      .nav-link {
+        color: #fff !important;
+      }
+      .nav-link:hover {
+        color: #e4136a !important;
+      }
+      /* .nav-item.active .nav-link {
+        color: #f1c40f !important;
+        border-bottom: 2px solid #f1c40f;
+      } */
+      .hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("images/media.jpg");
+        background-size: cover;
+        background-position: center;
+        height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+      }
+      .section-title {
+        color: #1a1a1a;
+        margin-bottom: 40px;
+        font-weight: bold;
+        text-align: center;
+      }
+      .gallery-img {
+        transition: transform 0.3s, box-shadow 0.3s;
+        border-radius: 10px;
+      }
+      .gallery-img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+      .media-coverage-gallery {
+        background: linear-gradient(135deg, #75094c, #2e2e2e);
+        padding: 60px 0;
+      }
+      .footer {
+        background: linear-gradient(90deg, #75094c, #2e2e2e);
+        color: #f7e9f0;
+        padding: 20px 0;
+        text-align: center;
+      }
+      .footer a {
+        color: #fae900;
+        margin: 0 10px;
+        font-size: 24px;
+      }
+      .footer a:hover {
+        color: #e42e2e;
+      }
+      /* Preloader */
+      .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+      }
+      .preloader.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .preloader .spinner {
+        border: 5px solid #f1c40f;
+        border-top: 5px solid #fff;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <a class="navbar-brand" href="index.html">MA</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="fashion-adults.html">Adults Fashion</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="fashion-kids.html">Kids Fashion</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="human-stories.html">Human Stories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="fantasy.html">Fantasy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="media.html">Celebrities</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" data-aos="fade-up">
+      <div>
+        <h1>Celebrities</h1>
+        <p>Showcasing my work through Celebrities appearances and features.</p>
+      </div>
+    </section>
+
+    <!-- Media Coverage Gallery -->
+    <section class="media-coverage-gallery">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Celebrities Gallery</h2>
+
+        <div class="row">
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <img
+              src="images/مشاهير/Screenshot_2025-06-01-17-05-00-374_com.instagram.android-edit.jpg"
+              class="img-fluid gallery-img"
+              alt="Media Coverage 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <img
+              src="images/مشاهير/Screenshot_2025-06-01-17-05-40-858_com.instagram.android-edit.jpg"
+              class="img-fluid gallery-img"
+              alt="Media Coverage 2"
+              loading="lazy"
+            />
+          </div>
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <img
+              src="images/مشاهير/Screenshot_2025-06-01-17-05-53-380_com.instagram.android-edit.jpg"
+              class="img-fluid gallery-img"
+              alt="Media Coverage 3"
+              loading="lazy"
+            />
+          </div>
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <img
+              src="images/مشاهير/Screenshot_2025-06-01-17-13-53-223_com.instagram.android-edit.jpg"
+              class="img-fluid gallery-img"
+              alt="Media Coverage 4"
+              loading="lazy"
+            />
+          </div>
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <img
+              src="images/مشاهير/Screenshot_2025-06-01-17-19-07-688_com.instagram.android-edit.jpg"
+              class="img-fluid gallery-img"
+              alt="Media Coverage 5"
+              loading="lazy"
+            />
+          </div>
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <img
+              src="images/مشاهير/Screenshot_2025-06-01-17-19-19-532_com.instagram.android-edit.jpg"
+              class="img-fluid gallery-img"
+              alt="Media Coverage 6"
+              loading="lazy"
+            />
+          </div>
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <img
+              src="images/مشاهير/Screenshot_2025-06-01-17-19-37-707_com.instagram.android-edit.jpg"
+              class="img-fluid gallery-img"
+              alt="Media Coverage 7"
+              loading="lazy"
+            />
+          </div>
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <img
+              src="images/مشاهير/Screenshot_2025-06-01-17-22-17-027_com.instagram.android-edit.jpg"
+              class="img-fluid gallery-img"
+              alt="Media Coverage 8"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>2025 Mohamed Attef. All rights reserved.</p>
+        <div>
+          <a
+            href="https://www.facebook.com/Mohamedattefphotographer?mibextid=wwXIfr"
+            target="_blank"
+            ><i class="fab fa-facebook"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/mohamed_attef_photographer/"
+            target="_blank"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a href="https://wa.me/+201005475678" target="_blank"
+            ><i class="fab fa-whatsapp"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <!-- Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <!-- Bootstrap 4 JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      // Initialize AOS
+      AOS.init();
+
+      // Preloader
+      window.addEventListener("load", function () {
+        const preloader = document.querySelector(".preloader");
+        preloader.classList.add("hidden");
+        document.body.classList.add("loaded");
+      });
+    </script>
+  </body>
+</html>

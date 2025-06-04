@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mohamed Attef - Kids Fashion</title>
+    <!-- Bootstrap 4 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    />
+    <!-- Google Fonts (Cairo) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Lightbox CSS -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css"
+      rel="stylesheet"
+    />
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "Cairo", sans-serif;
+        background-color: #f8f9fa; /* رجعنا للون الأصلي: رمادي فاتح */
+        margin: 0;
+        opacity: 0;
+        transition: opacity 0.5s ease-in;
+      }
+      body.loaded {
+        opacity: 1;
+      }
+      .navbar {
+        background: linear-gradient(90deg, #2e2e2e, #75094c);
+      }
+      .navbar-brand,
+      .nav-link {
+        color: #fff !important;
+      }
+      .nav-link:hover {
+        color: #e4136a !important;
+      }
+      /* .nav-item.active .nav-link {
+        color: #f1c40f !important;
+        border-bottom: 2px solid #f1c40f;
+      } */
+      .hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("images/kids.jpg");
+        background-size: cover;
+        background-position: center;
+        height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+      }
+      .section-title {
+        color: #1a1a1a;
+        margin-bottom: 40px;
+        font-weight: bold;
+        text-align: center;
+      }
+      .gallery-img {
+        transition: transform 0.3s, box-shadow 0.3s;
+        border-radius: 10px;
+      }
+      .gallery-img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+      .kids-gallery {
+        background: linear-gradient(135deg, #75094c, #2e2e2e);
+        padding: 60px 0;
+      }
+      .footer {
+        background: linear-gradient(90deg, #75094c, #2e2e2e);
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+      }
+      .footer a {
+        color: #fae900;
+        margin: 0 10px;
+        font-size: 24px;
+      }
+      .footer a:hover {
+        color: #e42e2e;
+      }
+      /* Preloader */
+      .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+      }
+      .preloader.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .preloader .spinner {
+        border: 5px solid #f1c40f;
+        border-top: 5px solid #fff;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      /* Pagination */
+      .pagination {
+        justify-content: center;
+        margin-top: 30px;
+      }
+      .page-item.active .page-link {
+        background-color: #f1c40f;
+        border-color: #f1c40f;
+        color: #000;
+      }
+      .page-link {
+        color: #000;
+      }
+      .page-link:hover {
+        background-color: #f1c40f;
+        color: #fff;
+      }
+      .gallery-page {
+        display: none;
+      }
+      .gallery-page.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <a class="navbar-brand" href="index.html">MA</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="fashion-adults.html">Adults Fashion</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="fashion-kids.html">Kids Fashion</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="human-stories.html">Human Stories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="fantasy.html">Fantasy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="media.html">Celebrities</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" data-aos="fade-up">
+      <div>
+        <h1>Kids Fashion</h1>
+        <p>Capturing the joy and style of children's fashion photography.</p>
+      </div>
+    </section>
+
+    <!-- Kids Fashion Gallery -->
+    <section class="kids-gallery">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Kids Fashion Gallery</h2>
+
+        <!-- Page 1 -->
+        <div class="gallery-page active" id="page-1">
+          <div class="row">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1590400516695-36708d3f964a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 1"
+              > -->
+                <img
+                  src="images/اطفال/1000549868-01-min.jpeg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 1"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 2"
+              > -->
+                <img
+                  src="images/اطفال/106-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 2"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 3"
+              > -->
+                <img
+                  src="images/اطفال/12 (4)-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 3"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 4"
+              > -->
+                <img
+                  src="images/اطفال/20241125_193723-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 4"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1551717743-49959800b1f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 5"
+              > -->
+                <img
+                  src="images/اطفال/6 copy (1)(1)-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 5"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 6"
+              > -->
+                <img
+                  src="images/اطفال/adult-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 6"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 7"
+              > -->
+                <img
+                  src="images/اطفال/90-1(1)-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 7"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 8"
+              > -->
+                <img
+                  src="images/اطفال/FaceApp_1695380318555-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 8"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 9"
+              > -->
+                <img
+                  src="images/اطفال/FaceApp_1695380844371-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 9"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1590400516695-36708d3f964a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 10"
+              > -->
+                <img
+                  src="images/اطفال/FaceApp_1695907301865-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 10"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 11"
+              > -->
+                <img
+                  src="images/اطفال/IMG-20240929-WA0217(1)-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 11"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 12"
+              > -->
+                <img
+                  src="images/اطفال/IMG-20240929-WA0217-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 12"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 2 -->
+        <div class="gallery-page" id="page-2">
+          <div class="row">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 13"
+              > -->
+                <img
+                  src="images/اطفال/IMG_20230922_140954(1)-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 13"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1551717743-49959800b1f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 14"
+              > -->
+                <img
+                  src="images/اطفال/IMG_20230922_140954-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 14"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 15"
+              > -->
+                <img
+                  src="images/اطفال/IMG_20240502_231120_091-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 15"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 16"
+              > -->
+                <img
+                  src="images/اطفال/IMG_20240502_231339_035-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 16"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 17"
+              > -->
+                <img
+                  src="images/اطفال/IMG_20240502_231825_724-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 17"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 18"
+              > -->
+                <img
+                  src="images/اطفال/IMG_20240502_231825_758-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 18"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1590400516695-36708d3f964a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 19"
+              > -->
+                <img
+                  src="images/اطفال/IMG_20240502_231825_791-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 19"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 20"
+              > -->
+                <img
+                  src="images/اطفال/IMG_20240808_015006_919-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 20"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 21"
+              > -->
+                <img
+                  src="images/اطفال/kids-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 21"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 22"
+              > -->
+                <img
+                  src="images/اطفال/received_262841323234327-min.jpeg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 22"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1551717743-49959800b1f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 23"
+              > -->
+                <img
+                  src="images/اطفال/received_678633537651404-min.jpeg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 23"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 24"
+              > -->
+                <img
+                  src="images/اطفال/received_974247183808937-min.jpeg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 24"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 3 -->
+        <div class="gallery-page" id="page-3">
+          <div class="row">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 25"
+              > -->
+                <img
+                  src="images/اطفال/SAVE_20231022_150006-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 25"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 26"
+              > -->
+                <img
+                  src="images/اطفال/SAVE_20231106_185058-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 26"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 27"
+              > -->
+                <img
+                  src="images/اطفال/SAVE_20231106_185822-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 27"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1590400516695-36708d3f964a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 28"
+              > -->
+                <img
+                  src="images/اطفال/SAVE_20231216_061321-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 28"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 29"
+              > -->
+                <img
+                  src="images/اطفال/SAVE_20231226_164755-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 29"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 30"
+              > -->
+                <img
+                  src="images/اطفال/SAVE_20240103_171216-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 30"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 31"
+              > -->
+                <img
+                  src="images/اطفال/SAVE_20240103_171315-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 31"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1551717743-49959800b1f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 32"
+              > -->
+                <img
+                  src="images/اطفال/SAVE_20240103_171327-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 32"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 33"
+              > -->
+                <img
+                  src="images/اطفال/SAVE_20240807_024606-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 33"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 34"
+              > -->
+                <img
+                  src="images/اطفال/SAVE_20240815_230213-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 34"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 35"
+              > -->
+                <img
+                  src="images/اطفال/SAVE_20241104_183017-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 35"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 36"
+              > -->
+                <img
+                  src="images/اطفال/SAVE_20241124_213950-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 36"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 4 -->
+        <div class="gallery-page" id="page-4">
+          <div class="row">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1590400516695-36708d3f964a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 37"
+              > -->
+                <img
+                  src="images/اطفال/SAVE_20241124_214027-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 37"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 38"
+              > -->
+                <img
+                  src="images/اطفال/SAVE_20241125_193411-min.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 38"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 39"
+              > -->
+                <img
+                  src="images/اطفال/Screenshot_2025-06-01-17-12-20-235_com.instagram.android-edit.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 39"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 40"
+              > -->
+                <img
+                  src="images/اطفال/Screenshot_2025-06-01-17-12-35-751_com.instagram.android-edit.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 40"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <!-- <a
+                href="https://images.unsplash.com/photo-1551717743-49959800b1f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                data-lightbox="kids-gallery"
+                data-title="Kids Fashion 41"
+              > -->
+                <img
+                  src="images/اطفال/Screenshot_2025-06-01-17-20-48-740_com.instagram.android-edit.jpg"
+                  class="img-fluid gallery-img"
+                  alt="Kids Fashion 41"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Pagination Controls -->
+        <nav aria-label="Gallery pagination">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" data-page="1">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#" data-page="2">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#" data-page="3">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#" data-page="4">4</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>2025 Mohamed Attef. All rights reserved.</p>
+        <div>
+          <a href="https://www.facebook.com/Mohamedattefphotographer?mibextid=wwXIfr" target="_blank"
+            ><i class="fab fa-facebook"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/mohamed_attef_photographer/"
+            target="_blank"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a href="https://wa.me/+201005475678" target="_blank"
+            ><i class="fab fa-whatsapp"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <!-- Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <!-- Bootstrap 4 JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Lightbox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script>
+      // Initialize AOS
+      AOS.init();
+
+      // Preloader
+      window.addEventListener("load", function () {
+        const preloader = document.querySelector(".preloader");
+        preloader.classList.add("hidden");
+        document.body.classList.add("loaded");
+      });
+
+      // Pagination
+      const pages = document.querySelectorAll(".gallery-page");
+      const pageLinks = document.querySelectorAll(".page-link");
+      pageLinks.forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          const pageNum = this.getAttribute("data-page");
+          pages.forEach((page) => page.classList.remove("active"));
+          document.getElementById(`page-${pageNum}`).classList.add("active");
+          pageLinks.forEach((l) => l.parentElement.classList.remove("active"));
+          this.parentElement.classList.add("active");
+          AOS.refresh(); // Refresh AOS animations
+        });
+      });
+    </script>
+  </body>
+</html>
